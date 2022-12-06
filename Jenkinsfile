@@ -1,5 +1,5 @@
-node('master'){
-    step('Hello world'){
+node('aws-codebuild'){
+    stage('Hello world'){
         echo "opa, joia?"
     }
 }
