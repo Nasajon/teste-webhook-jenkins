@@ -8,6 +8,6 @@ node('aws-codebuild'){
     
     stage('post chat'){
         echo "postando no google chat"
-        httpRequest "https://7f1a-187-95-168-12.sa.ngrok.io/webhook/${env.BRANCH_NAME}/${build_num}"
+        sh "curl -XPOST https://7f1a-187-95-168-12.sa.ngrok.io/webhook/${env.BRANCH_NAME}/${build_num}"
     }
 }
