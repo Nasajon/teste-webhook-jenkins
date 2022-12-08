@@ -5,16 +5,26 @@ node('master'){
     
     stage('Hello world'){
         echo "opa, joia?"
+        echo "opa, joia?"
+        echo "opa, joia?"
+        echo "opa, joia?"
+        echo "opa, joia?"
+        echo "opa, joia?"
     }
     
-    stage('post chat'){
-        echo "postando no google chat"
-        sendConsoleLink(jenkinsNameJob, build_num)
-    }
-}
+    stage('teste de current result'){
+        if(currentBuild.result == "FAILURE"){
+            echo "xiii faio"
+        }
 
-def sendConsoleLink(jenkinsNameJob, build_num){
-    withCredentials([string(credentialsId: 'JENKINS_QUEBRADO', variable: 'TOKEN')]) {
-        httpRequest customHeaders: [[maskValue: true, name: 'apikey', value: "${TOKEN}"]], httpMode: 'POST', ignoreSslErrors: true, url: "https://apisre.nasajonsistemas.com.br/webhook/${jenkinsNameJob}/${env.BRANCH_NAME}/${build_num}"
+        else if(currentBuild.result == "SUCCESS"){
+            echo "PARABAINS, pode pegar um biscoito no final do corredor a esquerda"
+        }
+
+        else{
+            currentBuild.result = "ABORTED"
+            echo "que coisa feia, abortando!"
+            error("bip bip parando...")
+        }
     }
 }
