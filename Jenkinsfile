@@ -9,11 +9,11 @@ node('master'){
     
     stage('post chat'){
         echo "postando no google chat"
-        sendConsoleLink(jenkinsNameJob)
+        sendConsoleLink(jenkinsNameJob, build_num)
     }
 }
 
-def sendConsoleLink(jenkinsNameJob){
+def sendConsoleLink(jenkinsNameJob, build_num){
     withCredentials([string(credentialsId: 'JENKINS_QUEBRADO', variable: 'TOKEN')]) {
         httpRequest customHeaders: [[maskValue: true, name: 'apikey', value: "${TOKEN}"]], httpMode: 'POST', ignoreSslErrors: true, url: "https://apisre.nasajonsistemas.com.br/webhook/${jenkinsNameJob}/${env.BRANCH_NAME}/${build_num}"
     }
