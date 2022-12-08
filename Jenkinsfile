@@ -10,11 +10,11 @@ node('master'){
         echo "opa, joia?"
         echo "opa, joia?"
         echo "opa, joia?"
-        sleep(time:2,unit:"SECONDS")
+        sleep(time:5,unit:"SECONDS")
     }
     
     stage('teste de current result'){
-        sleep(time:3,unit:"SECONDS")
+        sleep(time:5,unit:"SECONDS")
         if(currentBuild.currentResult == "FAILURE"){
             echo "xiii faio"
         }
