@@ -1,4 +1,4 @@
-node('aws-codebuild'){
+node('master'){
     
     def build_num = currentBuild.number
     
