@@ -13,11 +13,11 @@ node('master'){
     }
     
     stage('teste de current result'){
-        if(currentBuild.result == "FAILURE"){
+        if(currentBuild.currentResult == "FAILURE"){
             echo "xiii faio"
         }
 
-        else if(currentBuild.result == "SUCCESS"){
+        else if(currentBuild.currentResult == "SUCCESS"){
             echo "PARABAINS, pode pegar um biscoito no final do corredor a esquerda"
         }
 
