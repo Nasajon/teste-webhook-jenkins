@@ -23,10 +23,10 @@ node('master'){
             echo "PARABAINS, pode pegar um biscoito no final do corredor a esquerda"
         }
 
-        else if(currentBuild.currentResult == "ABORTED"){
-            
+        else{
+            currentBuild.result = "ABORTED"
             echo "que coisa feia, abortando!"
-            error("bip bip parando...")
+            
         }
     }
 }
