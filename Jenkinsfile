@@ -8,6 +8,8 @@ node('master'){
     
     stage('post chat'){
         echo "postando no google chat"
-        httpRequest httpMode: 'POST', customHeaders: [[maskValue: true, name: 'apikey', value: "${env.JENKINS_QUEBRADO}"]], url: "https://apisre.nasajonsistemas.com.br/webhook/Teste%20Webhook/${env.BRANCH_NAME}/${build_num}"
+          withCredentials([string(credentialsId: 'JENKINS_QUEBRADO', variable: 'TOKEN')]) {
+              httpRequest httpMode: 'POST', authenticate: TOKEN, url: "https://apisre.nasajonsistemas.com.br/webhook/Teste%20Webhook/${env.BRANCH_NAME}/${build_num}" 
+          }
     }
 }
