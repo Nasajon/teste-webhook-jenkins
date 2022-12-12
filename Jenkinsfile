@@ -21,8 +21,8 @@ node('master'){
         }catch (e) {
             if(currentBuild?.result == "FAILURE"){
                 echo "xiii faio"
-            }else{
-                currentBuild.result = "ABORTED"
+                throw e
+            }else if(currentBuild?.result == "ABORTED"){
                 echo "que coisa feia, abortando!"
                 throw e
             }
