@@ -17,17 +17,15 @@ node('master'){
         try{
             dir("zeca")
             sleep(time:5,unit:"SECONDS")
+            echo "PARABAINS, pode pegar um biscoito no final do corredor a esquerda"
+        }catch (e) {
             if(currentBuild?.result == "FAILURE"){
                 echo "xiii faio"
+            }else{
+                currentBuild.result = "ABORTED"
+                echo "que coisa feia, abortando!"
+                throw e
             }
-    
-            else if(currentBuild?.result == "SUCCESS"){
-                echo "PARABAINS, pode pegar um biscoito no final do corredor a esquerda"
-            }
-        }catch (e) {
-            currentBuild.result = "ABORTED"
-            echo "que coisa feia, abortando!"
-            throw e
         }
     }
 }
