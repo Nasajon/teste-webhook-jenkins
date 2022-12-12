@@ -14,19 +14,20 @@ node('master'){
     }
     
     stage('teste de current result'){
-        sleep(time:5,unit:"SECONDS")
-        if(currentBuild.currentResult == "FAILURE"){
-            echo "xiii faio"
-        }
-
-        else if(currentBuild.currentResult == "SUCCESS"){
-            echo "PARABAINS, pode pegar um biscoito no final do corredor a esquerda"
-        }
-
-        else{
+        try{
+            dir("zeca")
+            sleep(time:5,unit:"SECONDS")
+            if(currentBuild.currentResult == "FAILURE"){
+                echo "xiii faio"
+            }
+    
+            else if(currentBuild.currentResult == "SUCCESS"){
+                echo "PARABAINS, pode pegar um biscoito no final do corredor a esquerda"
+            }
+        }catch (e) {
             currentBuild.result = "ABORTED"
             echo "que coisa feia, abortando!"
-            
+            throw e
         }
     }
 }
