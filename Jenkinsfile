@@ -17,11 +17,11 @@ node('master'){
         try{
             dir("zeca")
             sleep(time:5,unit:"SECONDS")
-            if(currentBuild.currentResult == "FAILURE"){
+            if(currentBuild?.result == "FAILURE"){
                 echo "xiii faio"
             }
     
-            else if(currentBuild.currentResult == "SUCCESS"){
+            else if(currentBuild?.result == "SUCCESS"){
                 echo "PARABAINS, pode pegar um biscoito no final do corredor a esquerda"
             }
         }catch (e) {
