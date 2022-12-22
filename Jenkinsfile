@@ -3,6 +3,12 @@ node('master'){
     def build_num = currentBuild.number
     def jenkinsNameJob = "Instalador"
     
+    stage('Fetch') {
+        timeout(time: 60, unit: 'SECONDS') {
+            checkout scm
+        }
+    }
+    
     stage('Hello world'){
         echo "opa, joia?"
     }
