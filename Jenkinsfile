@@ -5,27 +5,14 @@ node('master'){
     
     stage('Hello world'){
         echo "opa, joia?"
-        echo "opa, joia?"
-        echo "opa, joia?"
-        echo "opa, joia?"
-        echo "opa, joia?"
-        echo "opa, joia?"
-        sleep(time:5,unit:"SECONDS")
     }
     
-    stage('teste de current result'){
-        try{
-            dir("zeca")
-            sleep(time:5,unit:"SECONDS")
-            echo "PARABAINS, pode pegar um biscoito no final do corredor a esquerda"
-        }catch (e) {
-            if(currentBuild?.result == "FAILURE"){
-                echo "xiii faio"
-                throw e
-            }else if(currentBuild?.result == "ABORTED"){
-                echo "que coisa feia, abortando!"
-                throw e
-            }
-        }
+    stage('iterate over something'){
+        def files = findFiles(glob: 'docs/**/*.html')
+        for file in files:
+        echo """
+        ${files[0].name} ${files[0].path} ${files[0].directory} 
+        ${files[0].length} ${files[0].lastModified}
+        """
     }
 }
