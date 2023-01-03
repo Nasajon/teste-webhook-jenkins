@@ -21,8 +21,8 @@ node('master'){
         dir('ci/'){
             def files = findFiles(glob: '*.yaml')
             
-            for(file in files[0].name){
-                echo "${file}"
+            for(def file : files){
+                echo "${file.name}"
                 echo "opa"
                 
                 stage('zeca'){
