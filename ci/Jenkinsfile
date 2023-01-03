@@ -14,8 +14,8 @@ node('master'){
     }
     
     stage('iterate over something'){
-        dir('docs/'){
-            def files = findFiles(glob: 'ci/*-values.yaml')
+        dir('ci/'){
+            def files = findFiles(glob: '*-values.yaml')
             for (file in files){
                 echo "${file[0].name}"
                 
