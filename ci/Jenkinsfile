@@ -22,7 +22,9 @@ node('master'){
             def files = findFiles(glob: '*.yaml')
             
             for(file in files){
-                echo "${file[0].name}"
+                file = file.split('-values')
+
+                echo "${file[0]}"
             }
         }
     }
