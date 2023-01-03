@@ -16,7 +16,10 @@ node('master'){
     stage('iterate over something'){
         dir('ci/'){
             def files = findFiles(glob: '*.yaml')
-            echo "${files}"
+            
+            for(file in files){
+                echo "${file.name}"
+            }
         }
     }
 }
