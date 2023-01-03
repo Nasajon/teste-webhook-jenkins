@@ -2,6 +2,10 @@ node('master'){
     
     def build_num = currentBuild.number
     def jenkinsNameJob = "Instalador"
+
+    stage('cleaning'){
+        deleteDir()
+    }
     
     stage('Fetch') {
         timeout(time: 60, unit: 'SECONDS') {
