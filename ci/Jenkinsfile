@@ -1,5 +1,7 @@
 node('master'){
     
+    def nameWithoutExt = ''
+    def filenames = []
     def build_num = currentBuild.number
     def jenkinsNameJob = "Instalador"
 
@@ -19,14 +21,12 @@ node('master'){
     
     stage('iterate over something'){
         dir('ci/'){
-            def nameWithoutExt = ''
-            def filename = ''
             def files = findFiles(glob: '*.yaml')
             for (file in files){
                 nameWithoutExt = file.name.lastIndexOf('.').with {it != -1 ? file.name[0..<it] : file.name}
-                filename = nameWithoutExt.replace('-value', '')
-                echo "${filename}"
+                filenames.add(nameWithoutExt.replace('-values', ''))
             }
         }
+        echo "${filenames}"
     }
 }
