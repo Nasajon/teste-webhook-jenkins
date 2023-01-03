@@ -19,13 +19,13 @@ node('master'){
     
     stage('iterate over something'){
         dir('ci/'){
-            def result = []
-            def wrap = findFiles(glob: '*')
-            wrap.each { it, i // iterator, index
-            def full_path = it.getPath()
-            result.add(full_path)
+            def nameWithoutExt = ''
+            def files = findFiles(glob: '*.yaml')
+            for (file in files){
+                nameWithoutExt = file.name.lastIndexOf('.').with {it != -1 ? file.name[0..<it] : file.name}
+
+                echo "${nameWithoutExt}"
             }
-            
         }
     }
 }
