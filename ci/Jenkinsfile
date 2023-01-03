@@ -19,16 +19,14 @@ node('master'){
     
     stage('iterate over something'){
         dir('ci/'){
+            def nameWithoutExt = ''
             def files = findFiles(glob: '*.yaml')
             
             for(def file : files){
-                echo "${file.name}"
-                echo "opa"
-                
-                stage('zeca'){
-                    echo "${file} terere"
-                }
+                nameWithoutExt = sh "basename ${file}"
 
+                echo "${nameWithoutExt}"
+                
             }
         }
     }
