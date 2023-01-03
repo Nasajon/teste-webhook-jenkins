@@ -23,10 +23,10 @@ node('master'){
             def files = findFiles(glob: '*.yaml')
             
             for(def file : files){
-                nameWithoutExt = sh "basename ${file}"
+                nameWithoutExt = echo "$(basename "${file}")"
 
                 echo "${nameWithoutExt}"
-                
+
             }
         }
     }
