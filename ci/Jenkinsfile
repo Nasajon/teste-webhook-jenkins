@@ -21,19 +21,10 @@ node('master'){
         dir('ci/'){
             def nameWithoutExt = ''
             def files = findFiles(glob: '*.yaml')
-            
-            echo "${files[0].name}"
-            echo "teste"
-
-            stage('qlqr coisa'){
-                echo "zumbo"
+            for (file in files){
+                nameWithoutExt = file.strip('-values')
+                echo "${nameWithoutExt}"
             }
-            // for(def file : files){
-            //     nameWithoutExt = echo "$(basename "${file}")"
-
-            //     echo "${nameWithoutExt}"
-
-            // }
         }
     }
 }
