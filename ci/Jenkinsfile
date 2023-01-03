@@ -21,10 +21,14 @@ node('master'){
         dir('ci/'){
             def files = findFiles(glob: '*.yaml')
             
-            for(file in files){
-                file = file.split('-values')
+            for(file in files[0].name){
+                echo "${file}"
+                echo "opa"
+                
+                stage('zeca'){
+                    echo "${file} terere"
+                }
 
-                echo "${file[0]}"
             }
         }
     }
