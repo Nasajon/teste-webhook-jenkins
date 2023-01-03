@@ -17,9 +17,9 @@ node('master'){
         dir('docs/'){
             def files = findFiles(glob: 'ci/*-values.yaml')
             for (file in files){
-                echo """
-                ${file[0].name}
-                """
+                echo "${file[0].name}"
+                
+                
             }
         }
     }
