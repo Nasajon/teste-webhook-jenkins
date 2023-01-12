@@ -17,6 +17,10 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
+      - name: Sets env vars for environment
+        run: |
+          echo "APP_NAME=teste-webhook-jenkins" >> $GITHUB_ENV
+          
       - name: Extract Branch Name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -33,9 +37,24 @@ jobs:
           token: ${{ secrets.GET_DEVOPS }}
           path: tools
 
-      - name: Sprint UP folder
+      - name: Get Sprint Version
+        id: SPRINT
+        env:
+          BRANCH_NAME: ${{steps.extract_branchname.outputs.branch}}
         run: |
-          ls tools
+          python3 tools/Ansible/roles/sprint_up -p $APP_NAME -m get -b $BRANCH_NAME -v sprint
+      
+      - name: Get Build Version
+        id: BUILD
+        env:
+          BRANCH_NAME: ${{steps.extract_branchname.outputs.branch}}
+        run: |
+          python3 tools/Ansible/roles/sprint_up -p $APP_NAME -m get -b $BRANCH_NAME -v build
+
+      - name: Generate Version
+        env:
+          VERSION: v2.${{ steps.SPRINT.outputs.SPRINT }}.${{ steps.BUILD.outputs.BUILD }}
+        run: echo $VERSION
           
         
       
