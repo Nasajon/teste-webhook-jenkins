@@ -27,10 +27,9 @@ jobs:
         run: echo "image:${{steps.extract_branchname.outputs.branch}}"
 
       - name: Git clone DevOps
+        with:
+          ssh-private-key: ${{ secrets.GET_DEVOPS }}
         run: |
-          echo adding ssh
-          eval `ssh-agent -s`
-          ssh-add - <<< '${{ secrets.GET_DEVOPS }}'
           echo Clone the repository...
           git clone -b master "git@github.com:Nasajon/DevOps.git" ${TEMP_FOLDER}
           ls ${TEMP_FOLDER}/Ansible/roles/sprint_up/files
