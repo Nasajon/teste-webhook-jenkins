@@ -28,9 +28,9 @@ jobs:
 
       - name: ssh private key
       - uses: actions/checkout@v2
-          with:
-            ssh-key: ${{ secrets.GET_DEVOPS }}
-            repository: Nasajon/DevOps
+        with:
+          ssh-key: ${{ secrets.GET_DEVOPS }}
+          repository: Nasajon/DevOps
 
       - name: Git Clone
         run: |
