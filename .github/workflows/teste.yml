@@ -26,20 +26,13 @@ jobs:
         shell: bash
         run: echo "image:${{steps.extract_branchname.outputs.branch}}"
 
-      - name: Add SSH KEY 
-        run: |
-          mkdir ~/.ssh/
-          echo "${{ secrets.GET_DEVOPS }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          touch ~/.ssh/known_hosts
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-        
+          
       - name: Git Clone
         run: |
           echo Create temporary folder to clone the repo into...
           TEMP_FOLDER="$(mktemp -d)" 
           echo Clone the repository...
-          git clone -b master "git@github.com:Nasajon/DevOps.git" ${TEMP_FOLDER}
+          git clone "https://NCScorp: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/github.com/Nasajon/DevOps.git" ${TEMP_FOLDER}
           ls ${TEMP_FOLDER}/Ansible/roles/
         
       
