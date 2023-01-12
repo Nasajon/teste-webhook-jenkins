@@ -24,6 +24,6 @@ jobs:
       
       - name: Check branch name
         shell: bash
-        run: echo "image:${steps.extract_branchname.outputs.branch}"
+        run: echo "image:${{steps.extract_branchname.outputs.branch}}"
         
       
