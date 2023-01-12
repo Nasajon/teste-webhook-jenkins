@@ -26,13 +26,18 @@ jobs:
         shell: bash
         run: echo "image:${{steps.extract_branchname.outputs.branch}}"
 
-          
+      - name: ssh private key
+      - uses: actions/checkout@v2
+          with:
+            ssh-key: ${{ secrets.GET_DEVOPS }}
+            repository: Nasajon/DevOps
+
       - name: Git Clone
         run: |
           echo Create temporary folder to clone the repo into...
           TEMP_FOLDER="$(mktemp -d)" 
           echo Clone the repository...
-          git clone "https://NCScorp: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@github.com/Nasajon/DevOps.git" ${TEMP_FOLDER}
-          ls ${TEMP_FOLDER}/Ansible/roles/
+          git clone "git@github.com:Nasajon/DevOps.git" ${TEMP_FOLDER}
+          ls ${TEMP_FOLDER}/Ansible/roles
         
       
