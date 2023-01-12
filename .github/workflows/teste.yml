@@ -27,9 +27,12 @@ jobs:
         run: echo "image:${{steps.extract_branchname.outputs.branch}}"
 
       - name: Add SSH KEY 
-        uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.GET_DEVOPS }}
+        run: |
+          mkdir ~/.ssh/
+          echo "${{ secrets.GET_DEVOPS }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          touch ~/.ssh/known_hosts
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
         
       - name: Git Clone
         run: |
