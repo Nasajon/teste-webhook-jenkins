@@ -43,7 +43,7 @@ jobs:
           BRANCH_NAME: ${{steps.extract_branchname.outputs.branch}}
         run: |
           pip install boto3
-          python3 tools/Ansible/roles/sprint_up/ssm_manager.py -p $APP_NAME -m get -b $BRANCH_NAME -v sprint
+          python3 tools/Ansible/roles/sprint_up/files/ssm_manager.py -p $APP_NAME -m get -b $BRANCH_NAME -v sprint
       
       - name: Get Build Version
         id: BUILD
@@ -51,7 +51,7 @@ jobs:
           BRANCH_NAME: ${{steps.extract_branchname.outputs.branch}}
         run: |
           pip install boto3
-          python3 tools/Ansible/roles/sprint_up/ssm_manager.py -p $APP_NAME -m get -b $BRANCH_NAME -v build
+          python3 tools/Ansible/roles/sprint_up/files/ssm_manager.py -p $APP_NAME -m get -b $BRANCH_NAME -v build
 
       - name: Generate Version
         env:
