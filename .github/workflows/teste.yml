@@ -27,10 +27,12 @@ jobs:
         run: echo "image:${{steps.extract_branchname.outputs.branch}}"
 
       - name: ssh private key
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ssh-key: ${{ secrets.GET_DEVOPS }}
           repository: Nasajon/DevOps
+          ref: master
+          path: tools
 
       - name: Git Clone
         run: |
