@@ -29,17 +29,13 @@ jobs:
       - name: ssh private key
         uses: actions/checkout@v3
         with:
-          ssh-key: ${{ secrets.GET_DEVOPS }}
           repository: Nasajon/DevOps
-          ref: master
+          token: ${{ secrets.GET_DEVOPS }}
           path: tools
 
-      - name: Git Clone
+      - name: Sprint UP folder
         run: |
-          echo Create temporary folder to clone the repo into...
-          TEMP_FOLDER="$(mktemp -d)" 
-          echo Clone the repository...
-          git clone -b master "git@github.com:Nasajon/DevOps.git" ${TEMP_FOLDER}
-          ls ${TEMP_FOLDER}/Ansible/roles
+          ls
+          
         
       
