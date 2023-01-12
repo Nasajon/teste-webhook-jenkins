@@ -27,7 +27,7 @@ jobs:
         run: echo "image:${{steps.extract_branchname.outputs.branch}}"
 
       - name: ssh private key
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           ssh-key: ${{ secrets.GET_DEVOPS }}
           repository: Nasajon/DevOps
