@@ -27,6 +27,7 @@ jobs:
         run: echo "image:${{steps.extract_branchname.outputs.branch}}"
 
       - name: Git clone DevOps
+        uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.GET_DEVOPS }}
         run: |
