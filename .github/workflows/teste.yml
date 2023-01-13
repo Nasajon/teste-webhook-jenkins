@@ -68,7 +68,7 @@ jobs:
 
       - name: Generate Version
         env:
-          VERSION: v2.${{ steps.SPRINT.outputs.SPRINT }}.${{ steps.BUILD.outputs.BUILD }}
+          VERSION: v2.${{ steps.SPRINT.outputs.* }}.${{ steps.BUILD.outputs.* }}
         run: echo $VERSION
           
         
