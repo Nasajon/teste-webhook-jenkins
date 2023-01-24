@@ -34,8 +34,8 @@ node('master'){
         dir('ci'){
             // for (filename in filenames){
                 def configVal = readYaml file: "admservico-values.yaml"
-                if (configVal['release'] == env.BRANCH_NAME){
-                    echo "configVal: " + configVal
+                // if (configVal['release'] == env.BRANCH_NAME){
+                echo "configVal: " + configVal
                 // }
                 // echo "Só vai seguindo"
             }
