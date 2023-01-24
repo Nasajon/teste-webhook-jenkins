@@ -1,1 +1,112 @@
-oi
+replicaCount: 2
+
+image:
+  repository: hub.nasajon.com.br/ana-data
+  pullPolicy: Always
+  tag: "v2.2212.2"
+
+release: "v2.2210"
+
+namespace:
+  name: admservicos
+
+imagePullSecrets: 
+  - name: hub-nasajon
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,If-None-Match,x-blackfire-query,apikey"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+  hosts:
+  - host: admservicos.anadata.nasajon.com.br
+    paths:
+      - path: /
+        pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - admservicos.anadata.nasajon.com.br
+
+livenessProbe:
+  tcpSocket:
+    port: 80
+  initialDelaySeconds: 10
+
+# livenessProbe:
+#   httpGet:
+#     path: /healthcheck
+#     port: http
+#   initialDelaySeconds: 10
+
+readinessProbe:
+  tcpSocket:
+    port: 80
+  initialDelaySeconds: 10
+
+# readinessProbe:
+#   httpGet:
+#     path: /healthcheck
+#     port: http
+#   initialDelaySeconds: 10
+
+configMap:
+  create: true
+  name: "admservicos-ana-data"
+  data:
+    django_debug: "false"
+    django_allowed_host: admservicos.anadata.nasajon.com.br
+    database_name_nasajon: nasajon_02542460000177
+    database_host_nasajon: "nasajon-bd16.skyone.app"
+    database_port_nasajon: "5432"
+    database_user_nasajon: ana_data      
+    allowed_username: ana@nasajon.com.br
+    keycloak_client_id: ana-data
+    keycloak_url: https://auth.nasajon.com.br/auth
+    sentry_env: ADMSERVICOS
+
+secret:
+  create: true
+  name: "admservicos-ana-data"
+  data: 
+    keycloak_realm: master
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: 
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: app-type
+          operator: In
+          values:
+          - application
