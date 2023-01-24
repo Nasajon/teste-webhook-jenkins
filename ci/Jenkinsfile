@@ -31,12 +31,14 @@ node('master'){
     }
 
     stage('Compare release and branchname'){
-        for (file in filenames){
-            def configVal = readYaml file: "${file}-values.yaml"
-            if (configVal['release'][0] == ${env.BRANCH_NAME}){
-                echo "configVal: " + configVal
+        dir('ci'){
+            for (file in filenames){
+                def configVal = readYaml file: "${file}-values.yaml"
+                if (configVal['release'][0] == ${env.BRANCH_NAME}){
+                    echo "configVal: " + configVal
+                }
+                echo "Só vai seguindo"
             }
-            echo "Só vai seguindo"
         }
     }
 }
