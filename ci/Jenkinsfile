@@ -36,7 +36,7 @@ node('master'){
                 def configVal = readYaml file: "admservico-values.yaml"
                 // if (configVal['release'] == env.BRANCH_NAME){
                 echo "configVal: " + configVal
-                echo "Release: " + configVal["release"][0]
+                echo "Release: " + configVal["release"]
                 // }
                 // echo "Só vai seguindo"
             // }
