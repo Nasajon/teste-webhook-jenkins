@@ -4,7 +4,8 @@ node('master'){
     def filenames = []
     def build_num = currentBuild.number
     def jenkinsNameJob = "Instalador"
-
+    def versionsToBuild = []
+    
     stage('cleaning'){
         deleteDir()
     }
@@ -35,10 +36,17 @@ node('master'){
             for (filename in filenames){
                 def configVal = readYaml file: "${filename}-values.yaml"
                 if (configVal['release'] == env.BRANCH_NAME){
-                    echo "configVal: " + configVal
-                    echo "Release: " + configVal["release"]
+                    versionsToBuild.add(filename)
                 }
-                echo "Só vai seguindo"
+                echo "Build pro docker"
+            }
+        }
+    }
+
+    stage('Versions to image deploy'){
+        dir('ci'){
+            for (version in versionsToBuild){
+                echo "Deploy: $version"
             }
         }
     }
