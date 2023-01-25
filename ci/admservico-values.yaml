@@ -5,7 +5,6 @@ image:
   pullPolicy: Always
   tag: "v2.2212.2"
 
-release: "v2.2210"
 
 namespace:
   name: admservicos
@@ -110,3 +109,5 @@ affinity:
           operator: In
           values:
           - application
+
+release: "main"
