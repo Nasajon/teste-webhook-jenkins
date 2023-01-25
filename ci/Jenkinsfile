@@ -32,14 +32,14 @@ node('master'){
 
     stage('Compare release and branchname'){
         dir('ci'){
-            // for (filename in filenames){
-                def configVal = readYaml file: "admservico-values.yaml"
-                // if (configVal['release'] == env.BRANCH_NAME){
-                echo "configVal: " + configVal
-                echo "Release: " + configVal["release"]
-                // }
-                // echo "Só vai seguindo"
-            // }
+            for (filename in filenames){
+                def configVal = readYaml file: "${filename}-values.yaml"
+                if (configVal['release'] == env.BRANCH_NAME){
+                    echo "configVal: " + configVal
+                    echo "Release: " + configVal["release"]
+                }
+                echo "Só vai seguindo"
+            }
         }
     }
 }
